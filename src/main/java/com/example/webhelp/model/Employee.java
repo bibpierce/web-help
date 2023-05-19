@@ -7,14 +7,15 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "employee")
-public class EmployeeDTO {
+public class Employee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "employee_number")
-    private Integer employeeNumber;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long employeeNumber;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "middle_name")

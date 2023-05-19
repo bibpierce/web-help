@@ -1,7 +1,7 @@
 package com.example.webhelp.enums;
 
 public enum Severity {
-    LOW(1), NORMAL(2), MAJOR(3), CRITICAL(4);
+    LOW(0), NORMAL(1), MAJOR(2), CRITICAL(3);
 
     private int id;
 

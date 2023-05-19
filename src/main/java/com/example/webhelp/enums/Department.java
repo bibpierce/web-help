@@ -1,10 +1,10 @@
 package com.example.webhelp.enums;
 
 public enum Department {
-    IT(1, "Information and Technology"),
-    ADMIN(2, "Administrator"),
-    HR(3, "Human Resource"),
-    SALES(4, "Sales Management");
+    IT(0, "Information and Technology"),
+    ADMIN(1, "Administrator"),
+    HR(2, "Human Resource"),
+    SALES(3, "Sales Management");
 
     Department(int id, String details) {
         this.id = id;

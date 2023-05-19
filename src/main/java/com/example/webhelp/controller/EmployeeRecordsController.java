@@ -1,8 +1,8 @@
 package com.example.webhelp.controller;
 
 
-import com.example.webhelp.model.EmployeeDTO;
-import com.example.webhelp.model.EmployeeRO;
+import com.example.webhelp.model.Employee;
+import com.example.webhelp.model.EmployeeDto;
 import com.example.webhelp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,29 +19,41 @@ public class EmployeeRecordsController {
     EmployeeService employeeService;
 
     @GetMapping("/view/{id}")
-    public ResponseEntity<EmployeeDTO> viewEmployee(@PathVariable Long id){
+    public ResponseEntity<Employee> viewEmployee(@PathVariable Long id){
         return new ResponseEntity<>(employeeService.viewEmployee(id), HttpStatus.OK);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<EmployeeDTO>> listEmployeeRecords(){
+    public ResponseEntity<List<Employee>> listEmployeeRecords(){
         return new ResponseEntity<>(employeeService.listEmployeeRecords(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity createEmployee(@RequestBody EmployeeDTO employeeDTO){
-        employeeService.createEmployee(employeeDTO);
+    public ResponseEntity createEmployee(@RequestBody Employee employee){
+        employeeService.createEmployee(employee);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
-    public ResponseEntity updateEmployee(@RequestBody EmployeeRO employeeRO){
-        employeeService.updateEmployee(employeeRO);
+    public ResponseEntity updateEmployee(@RequestBody EmployeeDto employeeDto){
+        employeeService.updateEmployee(employeeDto);
         return new ResponseEntity(HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteEmployee(@PathVariable Long id){
+    public ResponseEntity deleteEmployee(@PathVariable Long id) throws Exception {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/assign/{ticketNumber}")
+    public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam Long employeeNumber){
+        employeeService.assignTicket(ticketNumber, employeeNumber);
+        return new ResponseEntity<>("Ticket Assigned to " + employeeNumber,HttpStatus.OK);
+    }
+
+    @PutMapping("/watchers/{ticketNumber}")
+    public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam List<Long> employeeNumbers){
+        employeeService.assignWatchers(ticketNumber, employeeNumbers);
+        return new ResponseEntity<>("Watchers Assigned to " + employeeNumbers,HttpStatus.OK);
     }
 }
