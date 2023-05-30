@@ -2,19 +2,20 @@ package com.example.webhelp.model;
 
 import com.example.webhelp.enums.Department;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employee")
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(name = "employee_number")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeNumber;
     @Column(name = "first_name")
     private String firstName;
@@ -24,4 +25,5 @@ public class Employee {
     private String lastName;
     @Column(name = "department")
     private Department department;
+
 }

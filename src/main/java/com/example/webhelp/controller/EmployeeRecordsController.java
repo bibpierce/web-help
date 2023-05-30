@@ -45,15 +45,11 @@ public class EmployeeRecordsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/assign/{ticketNumber}")
+    @PatchMapping("/assign/{ticketNumber}")
     public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam Long employeeNumber){
         employeeService.assignTicket(ticketNumber, employeeNumber);
         return new ResponseEntity<>("Ticket Assigned to " + employeeNumber,HttpStatus.OK);
     }
 
-    @PutMapping("/watchers/{ticketNumber}")
-    public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam List<Long> employeeNumbers){
-        employeeService.assignWatchers(ticketNumber, employeeNumbers);
-        return new ResponseEntity<>("Watchers Assigned to " + employeeNumbers,HttpStatus.OK);
-    }
+
 }

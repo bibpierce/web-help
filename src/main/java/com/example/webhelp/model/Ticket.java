@@ -3,12 +3,15 @@ package com.example.webhelp.model;
 import com.example.webhelp.enums.Severity;
 import com.example.webhelp.enums.Status;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ticket")
 public class Ticket {
 
@@ -26,10 +29,7 @@ public class Ticket {
     private Status status;
     @OneToOne
     private Employee ticketAssignee;
-
-    @OneToMany
+    @ManyToMany
     private List<Employee> ticketWatchers;
-
-
 
 }

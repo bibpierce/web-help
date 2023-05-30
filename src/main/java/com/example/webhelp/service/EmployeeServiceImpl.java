@@ -1,5 +1,6 @@
 package com.example.webhelp.service;
 
+import com.example.webhelp.enums.Department;
 import com.example.webhelp.model.Employee;
 import com.example.webhelp.model.EmployeeDto;
 import com.example.webhelp.model.Ticket;
@@ -8,18 +9,15 @@ import com.example.webhelp.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     EmployeeRepository employeeRepository;
-
     @Autowired
     TicketRepository ticketRepository;
 
@@ -39,6 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeRepository.findAll();
     }
 
+
+
     @Override
     public void updateEmployee(EmployeeDto employeeDto){
         Employee employee = employeeRepository.findEmployeeById(employeeDto.getId());
@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public void deleteEmployee(Long id) throws Exception {
         Employee employee = employeeRepository.findEmployeeById(id);
         Ticket ticket = ticketRepository.findTicketByTicketAssignee_EmployeeNumber(employee.getEmployeeNumber());
-        if(ticket.getTicketAssignee().getId() != null){
+        if(ticket == null){
             employeeRepository.deleteById(id);
         }else {
             throw new Exception("Cannot delete with existing ticket");
@@ -67,13 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         ticketRepository.save(ticket);
     }
 
-    @Override
-    public void assignWatchers(Long ticketNumber, List<Long> employeeNumbers) {
 
-        Ticket ticket = ticketRepository.findTicketByTicketNumber(ticketNumber);
-        ticket.setTicketWatchers(employeeRepository.findByEmployeeNumberIn(employeeNumbers));
-        ticketRepository.save(ticket);
-    }
 
 
 

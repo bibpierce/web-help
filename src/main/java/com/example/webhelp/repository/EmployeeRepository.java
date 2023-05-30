@@ -1,6 +1,7 @@
 package com.example.webhelp.repository;
 
 import com.example.webhelp.model.Employee;
+import com.example.webhelp.model.EmployeeDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

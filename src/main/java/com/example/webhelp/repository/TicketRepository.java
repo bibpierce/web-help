@@ -10,5 +10,5 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     Ticket findTicketByTicketNumber(Long ticketNumber);
 
-    Ticket findTicketByTicketAssignee_EmployeeNumber(Long ticketNumber);
+    Ticket findTicketByTicketAssignee_EmployeeNumber(Long ticketAssignee_EmployeeNumber);
 }
