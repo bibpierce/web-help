@@ -46,9 +46,9 @@ public class EmployeeRecordsController {
     }
 
     @PatchMapping("/assign/{ticketNumber}")
-    public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam Long employeeNumber){
+    public ResponseEntity assignEmployee(@PathVariable Long ticketNumber, @RequestParam Long employeeNumber){
         employeeService.assignTicket(ticketNumber, employeeNumber);
-        return new ResponseEntity<>("Ticket Assigned to " + employeeNumber,HttpStatus.OK);
+        return new ResponseEntity<>(employeeNumber,HttpStatus.OK);
     }
 
 

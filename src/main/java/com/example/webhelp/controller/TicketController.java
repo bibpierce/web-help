@@ -23,8 +23,8 @@ public class TicketController {
         ticketService.createTicket(ticket);
         return new ResponseEntity<>("ticket created", HttpStatus.CREATED);
     }
-    @GetMapping("/view")
-    public ResponseEntity<Ticket> viewTicket(Long ticketNumber){
+    @GetMapping("/view/{ticketNumber}")
+    public ResponseEntity<Ticket> viewTicket(@PathVariable Long ticketNumber){
         return new ResponseEntity<>(ticketService.viewTicket(ticketNumber), HttpStatus.OK);
     }
 
@@ -34,7 +34,7 @@ public class TicketController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity updateTicket(TicketDto ticketDto){
+    public ResponseEntity updateTicket(@RequestBody TicketDto ticketDto){
         ticketService.updateTicket(ticketDto);
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -48,6 +48,6 @@ public class TicketController {
     @PatchMapping("/watchers/{ticketNumber}")
     public ResponseEntity assignTicket(@PathVariable Long ticketNumber, @RequestParam List<Long> employeeNumbers){
         ticketService.assignWatchers(ticketNumber, employeeNumbers);
-        return new ResponseEntity<>("Watchers Assigned to " + employeeNumbers,HttpStatus.OK);
+        return new ResponseEntity<>(employeeNumbers ,HttpStatus.OK);
     }
 }

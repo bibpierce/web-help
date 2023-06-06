@@ -1,6 +1,7 @@
 package com.example.webhelp.service;
 
 import com.example.webhelp.enums.Department;
+import com.example.webhelp.enums.Status;
 import com.example.webhelp.model.Employee;
 import com.example.webhelp.model.EmployeeDto;
 import com.example.webhelp.model.Ticket;
@@ -63,6 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public void assignTicket(Long ticketNumber, Long employeeNumber) {
         Ticket ticket = ticketRepository.findTicketByTicketNumber(ticketNumber);
+        ticket.setStatus(Status.ASSIGNED);
         ticket.setTicketAssignee(employeeRepository.findEmployeeByEmployeeNumber(employeeNumber));
         ticketRepository.save(ticket);
     }

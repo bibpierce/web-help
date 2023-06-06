@@ -1,5 +1,6 @@
 package com.example.webhelp.service;
 
+import com.example.webhelp.enums.Status;
 import com.example.webhelp.model.Ticket;
 import com.example.webhelp.model.TicketDto;
 import com.example.webhelp.repository.EmployeeRepository;
@@ -25,6 +26,7 @@ public class TicketServiceImpl implements TicketService{
 
     @Override
     public void createTicket(Ticket ticket){
+        ticket.setStatus(Status.NEW);
         ticketRepository.save(ticket);
     }
 
